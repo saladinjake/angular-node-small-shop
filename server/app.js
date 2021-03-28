@@ -4,7 +4,7 @@ const path = require("path");
 const app = express();
 const mongoose = require("mongoose");
 const config = require('./app/config/config');
-const authInterceptor = require('./app/middlewares/authInterceptor');
+
 
 
 app.use(bodyParser.json());
@@ -16,3 +16,5 @@ app.get("*", (req, res) => {
 });
 
 app.listen(3000, () => console.log("App running on port 3000...yeh!!!"));
+
+module.exports=app;
