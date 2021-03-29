@@ -1,5 +1,5 @@
 const Promise = require('bluebird');
-import mongoose from  'mongoose';
+import mongoose,{ Document, Model, model, Types, Schema, Query } from "mongoose"
 const PaymentsSchema = new mongoose.Schema({
     full_name: {
         type: String,
@@ -12,10 +12,6 @@ const PaymentsSchema = new mongoose.Schema({
       'Unpaid'
       ],
       default: 'Successful',
-    },
-    quotation_id:{
-     type:String,
-      default: 'No quotation assigned yet'
     },
     email: {
         type: String,
@@ -43,6 +39,9 @@ const PaymentsSchema = new mongoose.Schema({
 
 
 
+
+
+
 PaymentsSchema.set('toJSON', {getters: true, virtuals: true});
 PaymentsSchema.statics = {
     createPayments(data, callback)  {
@@ -50,5 +49,75 @@ PaymentsSchema.statics = {
     },
 };
 
-const Payment = mongoose.model('PaymentModel', PaymentsSchema);
-export default Payment;
+
+
+
+
+enum PayStatus {
+  Successful=1,
+  Failed =0,
+  Unpaid =2
+}
+
+export interface Payment {
+  full_name: string,
+  email: string,
+  reference: string;
+  amount: number,
+  status: PayStatus,
+  phone_number:string,
+  createdDate:string,
+  userId: string
+}
+
+/**
+ * Not directly exported
+ */
+interface PaymentBaseDocument extends Payment, Document {
+  full_name: string,
+  email: string,
+  reference: string;
+  amount: number,
+  status: PayStatus,
+  phone_number:string,
+  createdDate:string,
+  userId: string
+  createPayments(data: Payment , callback:Function): string;
+}
+
+// Export this for strong typing
+export interface PaymentDocument extends PaymentBaseDocument {
+
+}
+
+// Export this for strong typing
+export interface PaymentPopulatedDocument extends PaymentBaseDocument {
+
+}
+
+
+// For model
+export interface PaymentModel extends Model<PaymentDocument> {
+  createPayments(id: string): Promise<PaymentPopulatedDocument>
+}
+
+
+// Document middlewares
+// UserSchema.pre<UserDocument>("save", function(next) {
+//   if (this.isModified("password")) {
+//     this.password = hashPassword(this.password)
+//   }
+// });
+
+// Query middlewares
+// UserSchema.post<Query<UserDocument, UserDocument>>("findOneAndUpdate", async function(doc) {
+//   await updateCompanyReference(doc);
+// });
+
+// Default export
+export default model<PaymentDocument, PaymentModel>("Payment", PaymentsSchema)
+
+
+
+// const Payment = mongoose.model('PaymentModel', PaymentsSchema);
+// export default Payment;

@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import {Schema, Model, Document, model} from 'mongoose';
 import * as bcrypt from 'bcrypt-nodejs';
 
-// import uniqueValidator from 'mongoose-unique-validator';
+import uniqueValidator from 'mongoose-unique-validator';
 import jwt from 'jsonwebtoken'
 import config from '../config/config'
 
@@ -57,7 +57,7 @@ userSchema.methods.generateJWT = function(data:{_id:string,email:string}) {
 userSchema.methods.findByEmail = (email: string, callback: Function) => {
     User.findOne({email: email}, callback);
 };
-// userSchema.plugin(uniqueValidator);
+userSchema.plugin(uniqueValidator);
 
 export type UserModel = Model<IUser> & IUserModel & IUser;
 

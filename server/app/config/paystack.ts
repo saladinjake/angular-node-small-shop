@@ -1,9 +1,13 @@
+import dotenv from "dotenv";
+dotenv.config();
+const api_url_init ='https://api.paystack.co/transaction/initialize';
+const api_url_verify ='https://api.paystack.co/transaction/verify/';
 const paystack = (request) => {
-    const MySecretKey = 'Bearer sk_test_xxxx';
-    //replace the secret key with that from your paystack account
+    const MySecretKey = 'Bearer '+ process.env.PAYSTACKSECRET; //saladin
+
     const initializePayment = (form, mycallback) => {
         const options = {
-            url : 'https://api.paystack.co/transaction/initialize',
+            url :api_url_init,
             headers : {
                 authorization: MySecretKey,
                 'content-type': 'application/json',
@@ -19,7 +23,7 @@ const paystack = (request) => {
 
     const verifyPayment = (ref, mycallback) => {
         const options = {
-            url : 'https://api.paystack.co/transaction/verify/'+encodeURIComponent(ref),
+            url : api_url_verify+encodeURIComponent(ref),
             headers : {
                 authorization: MySecretKey,
                 'content-type': 'application/json',
@@ -35,4 +39,5 @@ const paystack = (request) => {
     return {initializePayment, verifyPayment};
 }
 
-export default  paystack;
+
+module.exports=paystack;

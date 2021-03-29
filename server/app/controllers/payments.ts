@@ -1,6 +1,6 @@
-
+import PaystackApi from '../services/paystack.service';
 class PaymentsGatewayApi{
-  static paystackPayMeMoney(req,res){
+  static paystackPayMeMyMoney(req,res){
     return PaystackApi.paystackPayMeMoney(req,res);
   }
 
@@ -16,9 +16,13 @@ class PaymentsGatewayApi{
     return PaystackApi.paystackHistory(req,res);
   }
 
-  static paystackPayments(req,res){
-    return PaystackApi.paystackPayments(req,res);
-  }
+  // static paystackPayments(req,res){
+  //   return PaystackApi.paystackPayments(req,res);
+  // }
+
+  // static createPaymentDetail(req,res){
+  //   return PaystackApi.createPaymentDetail(req,res);
+  // }
 }
 
 export default PaymentsGatewayApi;
