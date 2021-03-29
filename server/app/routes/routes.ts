@@ -2,6 +2,7 @@ import { Router } from 'express';
 import authInterceptor from '../middlewares/authInterceptor';
 import authController from '../controllers/auth';
 import homeController from '../controllers/home';
+import PaymentsController from '../controllers/payments';
 
 
 const router = Router();
