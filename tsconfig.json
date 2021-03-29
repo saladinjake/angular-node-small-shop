@@ -4,7 +4,31 @@
 
   To learn more about this file see: https://angular.io/config/solution-tsconfig.
 */
+
+
 {
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "experimentalDecorators": true,
+    "outDir": "dist",
+    "rootDir": "./",
+    "outDir": "./build",
+    "esModuleInterop": true
+
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "api-doc",
+    "config",
+    "environment",
+    "middleware",
+    "routers",
+    "services"
+  ],
   "files": [],
   "references": [
     {
@@ -13,5 +37,5 @@
     {
       "path": "./tsconfig.spec.json"
     }
-]
+  ]
 }
