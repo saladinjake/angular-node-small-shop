@@ -8,7 +8,7 @@ const authInterceptor = function(req: Request, res: Response, next: NextFunction
   try {
     const token = req.headers.authorization;
     const decode = jwt.verify(token, config.secret);
-    // req.userData = decode;
+    req.body.userData = decode;
     next();
   } catch(err) {
     return res.status(403).json({

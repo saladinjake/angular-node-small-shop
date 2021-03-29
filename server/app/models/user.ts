@@ -8,6 +8,7 @@ import config from '../config/config'
 
 
 export interface IUser extends Document {
+   _id: string;
     name: string;
     email: string;
     password: string;
@@ -16,7 +17,8 @@ export interface IUser extends Document {
 export interface IUserModel {
     generateJWT(): void
     hashPassword(password: string):string
-    validatePassword(password: string,hash:string): void
+    validatePassword(password: string,hash:string,callback:Function): void
+    findByEmail(email: string, callback: Function): void
 }
 
 
@@ -30,8 +32,12 @@ const userSchema = new mongoose.Schema({
 userSchema.methods.hashPassword = function(password:string) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
 };
-userSchema.methods.validatePassword = function(password:string,hash:string) {
-   return bcrypt.compareSync(password, hash);
+userSchema.methods.validatePassword = function(password:string,hash:string,callback:Function) {
+   // return bcrypt.compareSync(password, hash);
+   bcrypt.compare(password, hash, (err, isMatch) => {
+        if(err) throw err;
+        callback(null, isMatch);
+    });
 };
 userSchema.methods.generateJWT = function(data:{_id:string,email:string}) {
   const today = new Date();
@@ -45,8 +51,18 @@ userSchema.methods.generateJWT = function(data:{_id:string,email:string}) {
     exp: "48h" ,
   }, config.secret);
 }
+
+
+
+userSchema.methods.findByEmail = (email: string, callback: Function) => {
+    User.findOne({email: email}, callback);
+};
 // userSchema.plugin(uniqueValidator);
 
 export type UserModel = Model<IUser> & IUserModel & IUser;
 
 export const User: UserModel = <UserModel>model<IUser>("User", userSchema);
+
+
+
+// const userModel = mongoose.model<User & mongoose.Document>('User', userSchema);
