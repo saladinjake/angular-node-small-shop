@@ -1,37 +1,39 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
 
-//core components
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import {ProductsModule} from "./products/products.module";
+import {ProductsRoutingModule} from "./products/products-routing.module";
+import {SharedModule} from "./shared/shared.module";
+import {ServicesModule} from "./services/services.module";
+import { AuthModule } from './auth/auth.module';
 
-//import other modules customly built
-import { DashboardModule } from './dashboard/dashboard.module';
+import { AuthGuard } from './auth/guards/auth-guard.service';
 
-//core routes
-import { APP_ROUTES } from './app.routes';
+import { HTTP_INTERCEPTORS }  from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    RegisterComponent,
-    PageNotFoundComponent
+    // HomeComponent,
+
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule,
-    RouterModule.forRoot(APP_ROUTES),
-    DashboardModule
+    AppRoutingModule,
+    AuthModule,
+
+    ProductsRoutingModule,
+    ProductsModule,
+
+    SharedModule,
+    ServicesModule,
 
   ],
-  providers: [],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
