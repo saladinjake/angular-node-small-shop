@@ -22,6 +22,6 @@ export class UserService {
         'Authorization': token
       })
     }
-    return this._http.get('/users', httpOptions);
+    return this._http.get('http://localhost:4000/api/users', httpOptions);
   }
 }

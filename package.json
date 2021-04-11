@@ -1,7 +1,7 @@
 {
   "name": "third-app",
   "version": "0.0.0",
-  
+
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
