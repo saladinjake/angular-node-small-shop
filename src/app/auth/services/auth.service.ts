@@ -20,11 +20,11 @@ export class AuthService {
           }
    }
   register(user) {
-    return this._http.post('http://localhost:4000/register', user, this.httpOptions);
+    return this._http.post('http://localhost:4000/api/register', user, this.httpOptions);
     // localStorage.setItem('user', user);
   }
   login(user) {
-    return this._http.post('http://localhost:4000/login', user, this.httpOptions);
+    return this._http.post('http://localhost:4000/api/login', user, this.httpOptions);
   }
   logout() {
     localStorage.clear();

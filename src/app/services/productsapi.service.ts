@@ -38,7 +38,7 @@ export class ProductsApiService {
       })
     }
 
-    this.http.get<any[]>('http://localhost:4000/products',httpOptions).subscribe(data => {
+    this.http.get<any[]>('http://localhost:4000/api/products',httpOptions).subscribe(data => {
       this._products =   [...data];
       this.products =this._products;
       this.productsSub.next([...this._products]);
@@ -95,7 +95,7 @@ export class ProductsApiService {
 
     };
 
-    return this.http.post('http://localhost:4000/checkout', data,Options);
+    return this.http.post('http://localhost:4000/api/checkout', data,Options);
   }
 
   resetCart(){
