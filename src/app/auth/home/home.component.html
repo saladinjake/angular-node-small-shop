@@ -1,0 +1,176 @@
+<div class="topbar">
+
+                <!-- LOGO -->
+                <div class="topbar-left">
+                    <div class="text-center">
+                        <a href="index.html" class="logo"><i class="icon-magnet icon-c-logo"></i><span>Ub<i class="md md-album"></i>ld</span></a>
+                        <!-- Image Logo here -->
+                        <!--<a href="index.html" class="logo">-->
+                            <!--<i class="icon-c-logo"> <img src="assets/images/logo_sm.png" height="42"/> </i>-->
+                            <!--<span><img src="assets/images/logo_light.png" height="20"/></span>-->
+                        <!--</a>-->
+                    </div>
+                </div>
+
+                <!-- Button mobile view to collapse sidebar menu -->
+                <div class="navbar navbar-default" role="navigation">
+                    <div class="container">
+                        <div class="">
+                            <div class="pull-left">
+                                <button class="button-menu-mobile open-left waves-effect waves-light">
+                                    <i class="md md-menu"></i>
+                                </button>
+                                <span class="clearfix"></span>
+                            </div>
+
+                            <ul class="nav navbar-nav hidden-xs">
+                                <li><a href="#" class="waves-effect waves-light">Jumanji Stores</a></li>
+
+                            </ul>
+
+                            <ul class="nav navbar-nav navbar-left pull-left">
+                              <li class="dropdown top-menu-item-xs">
+                                  <a routerLink="/cart" data-target="#" class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="true">
+                                    Cart
+                                      <i class="icon-bell"></i> <span class="badge badge-xs badge-danger" *ngIf="cart.length">{{cart.length}}</span>
+                                  </a>
+
+                              </li>
+
+                            </ul>
+
+
+
+
+                            <ul class="nav navbar-nav navbar-right pull-right">
+                                <li class="dropdown top-menu-item-xs">
+                                    <a href="#" data-target="#" class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="true">
+                                        <i class="icon-bell"></i> <span class="badge badge-xs badge-danger">3</span>
+                                    </a>
+
+                                </li>
+                                <li class="hidden-xs">
+                                    <a routerLink="./auth/login" id="btn-fullscreen" class="waves-effect waves-light">login</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <!--/.nav-collapse -->
+                    </div>
+                </div>
+            </div>
+
+
+
+
+  <div class="row">
+
+    <div class="col-md-3">
+
+
+      <div class="left side-menu" style="">
+                      <div class="slimScrollDiv" style="position: relative; overflow: inherit; width: auto; height: 3002px;"><div class="sidebar-inner slimscrollleft" style="overflow: inherit; width: auto; height: 3002px;">
+                          <!--- Divider -->
+                          <div id="sidebar-menu">
+                              <ul>
+
+                              	<li class="text-muted menu-title">Navigation</li>
+
+                                  <li class="has_sub">
+                                      <a routerLink='./' class="waves-effect"><i class="ti-home"></i> <span> Home </span> <span class="menu-arrow"></span></a>
+
+                                  </li>
+
+
+                                  <li class="has_sub">
+                                      <a routerLink='./products' class="waves-effect"><i class="ti-location-pin"></i><span> Products </span> <span class="menu-arrow"></span></a>
+
+                                  </li>
+
+                                  <li class="has_sub">
+                                      <a routerLink='./reviews' class="waves-effect"><i class="ti-location-pin"></i><span> Related Products </span> <span class="menu-arrow"></span></a>
+
+                                  </li>
+
+                                  <li class="has_sub">
+                                      <a href="javascript:void(0);" class="waves-effect"><i class="ti-location-pin"></i><span> Logout </span> <span class="menu-arrow"></span></a>
+
+                                  </li>
+
+                                  <!-- <li class="text-muted menu-title">More</li> -->
+
+
+                              </ul>
+                              <div class="clearfix"></div>
+                          </div>
+                          <div class="clearfix"></div>
+                      </div><div class="slimScrollBar" style="background: rgb(152, 166, 173); width: 5px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 3002px; visibility: hidden;"></div><div class="slimScrollRail" style="width: 5px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
+                  </div>
+
+
+    </div>
+<header class="col-md-9 headerhero">
+
+
+
+
+
+
+        <div class="text-box ">
+            <div class="heading">
+                <span class="primary_heading">
+                    Jumanj stores
+                </span>
+                <span class="sub_heading">
+                    Magic shop
+                </span>
+                <a routerLink="./auth/login" class="btn btn-white btn-animated">GET STARTED</a>
+            </div>
+        </div>
+    </header>
+
+
+
+
+
+
+
+
+
+    <div class="row">
+
+      <div class="container">
+
+                      <!-- Page-Title -->
+          <div class="row">
+
+            <div class="col-sm-6 col-lg-4 col-md-4 mobiles" *ngFor="let player of products">
+                <div class="product-list-box thumb">
+                    <a href="javascript:void(0);" class="image-popup" title="Screenshot-1">
+                        <img src="{{player.image}}" class="thumb-img" alt="work-thumbnail">
+                    </a>
+
+                    <div class="product-action">
+                        <a style="float:right" routerLink="./products/{{player.id}}" class="btn btn-success ">Detail</a>
+
+                    </div>
+
+                    <div class="price-tag">
+                        ${{player.id}}
+                    </div>
+                    <div class="detail">
+                        <h4 class="m-t-0"><a href="" class="text-dark">{{player.name}}</a> </h4>
+
+                        <h5 class="m-0"> <span class="text-muted"> {{player.address}}</span></h5>
+                    </div>
+                </div>
+            </div>
+
+
+
+              </div> <!-- End row -->
+
+
+
+
+                  </div>

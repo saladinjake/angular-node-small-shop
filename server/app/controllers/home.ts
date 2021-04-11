@@ -2,17 +2,22 @@ import {Request, Response} from 'express';
 import { User } from '../models/user';
 import  Product  from '../models/product';
 import  Order  from '../models/product';
+import jwt from 'jsonwebtoken';
 class homeController {
   static index(request: Request, response: Response){
-    Product.find().then(rec => {
+    Product.find({}).then(rec => {
+      console.log(rec);
       if(rec) {
-        response.status(200).json(rec);
+        return response.status(200).json(rec);
       } else {
-        response.status(200).json([]);
+      
+        return response.status(200).json([]);
       }
     })
 
   }
+
+
   static checkout(request: Request, response: Response){
     const newOrder = new Order({
       firstName: request.body.firstName,

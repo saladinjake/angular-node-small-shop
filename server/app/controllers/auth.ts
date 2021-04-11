@@ -1,6 +1,7 @@
 import {Request, Response, NextFunction} from 'express';
-import { User, UserModel } from '../models/user';
 import mongoose from 'mongoose'
+
+import {  User, hashPassword, findByEmail,validatePassword,generateJWT  } from '../models/user';
 
 class authController {
   public static login(request: Request, response: Response){
@@ -15,9 +16,11 @@ class authController {
                 return false;
       }
 
-      User.findByEmail(email, (err, user) => {
+      console.log(User);
+
+      findByEmail(User, email, (err, user) => {
         if(user) {
-            User.validatePassword(request.body.password, user.password, (err, isMatch) => {
+            validatePassword(request.body.password, user.password, (err, isMatch) => {
                 if (err) {
                     response.status(500);
                       response.json({
@@ -29,7 +32,8 @@ class authController {
                     const withTokem = {
                         email: isMatch.email,
                         _id: isMatch._id,
-                        token:User.generateJWT()
+                        token:generateJWT({_id: isMatch._id,email: isMatch.email,
+                        })
                     };
                     response.json(withTokem);
                 } else {
@@ -49,13 +53,14 @@ class authController {
             }
       });
   }
-  
+
  public static register(request: Request,response: Response){
     const newUser = new User({
       name: request.body.fullName,
       email: request.body.email,
     })
-    newUser.password= User.hashPassword(request.body.password);
+    console.log(request.body)
+    newUser.password= hashPassword(request.body.password);
     newUser.save().then(function(rec){
       response.status(201).json(rec)
     })

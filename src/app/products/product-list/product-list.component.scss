@@ -1,0 +1,56 @@
+/* Popover */
+.popover {
+  font-family: inherit;
+  border: none;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  background-clip: padding-box;
+}
+.popover .popover-title {
+  background-color: transparent;
+  color: #7e57c2;
+  font-weight: 600;
+}
+
+
+
+.mx-box {
+  max-height: 380px;
+  min-height: 380px;
+}
+.thumb-sm {
+  height: 32px;
+  width: 32px;
+}
+.thumb-md {
+  height: 48px;
+  width: 48px;
+}
+.thumb-lg {
+  height: 88px;
+  width: 88px;
+}
+
+
+
+
+.thumb {
+  background-color: #ffffff;
+  border-radius: 3px;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+  margin-top: 30px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  width: 100%;
+}
+.thumb-img {
+  border-radius: 2px;
+  overflow: hidden;
+  width: 100%;
+}
+.gal-detail h4 {
+  margin-top: 16px;
+}

@@ -1,0 +1,126 @@
+
+* {
+  box-sizing: border-box;
+}
+
+header.logo {
+    width: 100%;
+    padding: 12px;
+    height: 60px;
+    background-color: #fff;
+    border-bottom: 2px solid #eee;
+}
+header.logo #title {
+    font-size: 20px;
+   color:#1c74bc;
+}
+
+@media all and (max-width : 768px) {
+    header {
+        text-align: center;
+    }
+    
+}
+
+/* Create two equal columns that floats next to each other */
+.columns {
+  float: left;
+  width: 50%;
+  /*padding: 10px;*/
+  /*height: 300px;*/ /* Should be removed. Only for demonstration */
+}
+
+
+.columns-75 {
+  float: left;
+  width: 70%;
+  padding: 10px;
+ /* height: 300px; *//* Should be removed. Only for demonstration */
+}
+
+.columns-25 {
+  float: left;
+  width: 30%;
+  
+  padding: 5px;
+  /*height: 300px;*/ /* Should be removed. Only for demonstration */
+}
+/* Clear floats after the columns */
+.rowss:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+.ui-mock-bg{
+  width:70%;
+  padding:5px;
+  /*background-image:url('../img/landing-bg.jpg');background-repeat: no-repeat;*/
+  display:block;
+  opacity:1;
+  
+  margin:0 auto;
+  margin-top:80px;
+  /* background:url('../img/landing-bg.jpg') 11px 6px no-repeat;*/
+}
+
+.google-sign{
+  width:100%;
+}
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .columns, .columns-25, .columns-75 {
+    width: 100%;
+  }
+
+  .columns-75{
+    display: none;
+  }
+
+  .google-sign{
+    width:50%;
+  }
+}
+
+
+
+
+footer{
+    width: 100%;
+    padding: 10px;
+    background-color: #fff;
+    border-top: 5px solid #1c74bc;
+    color: #1c74bc;
+    text-align: center;
+}
+
+
+.animated {
+   background-image: url("./../img/logo.jpg");
+   background-repeat: no-repeat;
+   background-position: left top;
+   padding-top:2px;
+   margin-bottom:5px;
+   -webkit-animation-duration: 10s;
+   animation-duration: 10s;
+   -webkit-animation-fill-mode: both;
+   animation-fill-mode: both;
+   width:160px;
+   height:20px;
+}
+
+@-webkit-keyframes fadeIn {
+   0% {opacity: 0;}
+   100% {opacity: 1;}
+}
+
+@keyframes fadeIn {
+   0% {opacity: 0;}
+   100% {opacity: 1;}
+}
+
+.fadeIn {
+   -webkit-animation-name: fadeIn;
+   animation-name: fadeIn;
+}
