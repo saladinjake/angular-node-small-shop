@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductsService } from '../services/productsapi.service';
+import { ProductsApiService } from '../../services/productsapi.service';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -24,7 +24,7 @@ export class CheckoutComponent implements OnInit {
     state: ['', Validators.required],
     zip: ['', Validators.required],
   });
-  constructor(private router: Router, private fb: FormBuilder, private productsService: ProductsService) { }
+  constructor(private router: Router, private fb: FormBuilder, private productsService: ProductsApiService) { }
 
   ngOnInit() {
     this.productsService.getCart().subscribe(data => {

@@ -13,27 +13,24 @@ import { AuthModule } from './auth/auth.module';
 import { AuthGuard } from './auth/guards/auth-guard.service';
 
 import { HTTP_INTERCEPTORS }  from '@angular/common/http';
-
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 @NgModule({
   declarations: [
     AppComponent,
-    // HomeComponent,
-
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     AuthModule,
-
     ProductsRoutingModule,
     ProductsModule,
-
-    SharedModule,
     ServicesModule,
+    SharedModule,
 
   ],
 
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule { }

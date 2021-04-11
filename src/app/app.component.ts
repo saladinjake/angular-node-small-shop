@@ -33,11 +33,9 @@ export class AppComponent implements OnInit,  AfterViewInit {
     setTimeout(() => {
       this.gtd.nativeElement.style.display = 'block';
       this.gtd.nativeElement.style.visibility = 'visibile';
-
       this.mockstart.nativeElement.style.display="none";
       this.loader.nativeElement.style.display = 'none';
       this.loading.nativeElement.style.display = 'none';
-
       this.gtd.nativeElement.style.display = 'block';
       this.gtd.nativeElement.style.visibility = 'visibile';
     }, 5000);

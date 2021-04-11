@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Product} from "../../shared/product";
-import {ProductService} from "../../services/product.service";
+import { ProductService } from "../../services/product.service";
+import { ProductsApiService } from '../../services/productsapi.service'
 
 @Component({
   selector: 'app-player-list',
@@ -11,25 +12,25 @@ export class ProductListComponent implements OnInit {
 
   public products: Product[];
 
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductsApiService) {  //ProductsService
 
   }
 
   ngOnInit() {
-    this.productService.getProducts().subscribe(products => this.products = products, err => console.log('error: ' + err));
+    // this.productService.getProducts().subscribe(products => this.products = products, err => console.log('error: ' + err));
 
-    // this.productsService.fetchProducts();
-    // this.productsService.getProducts().subscribe(data => {
-    //   this.products = [...data];
-    // });
+    this.productService.fetchProducts();
+    this.productService.getProducts().subscribe(data => {
+      this.products = [...data];
+    });
   }
 
 
   addItemToCart(item) {
-    this.productsService.addToCart(item._id);
+    this.productService.addToCart(item._id);
   }
   itemInCart(item) {
-    return this.productsService.findItemInCart(item._id);
+    return this.productService.findItemInCart(item._id);
   }
 
 

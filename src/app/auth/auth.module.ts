@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule,ReactiveFormsModule} from "@angular/forms"
 import {Routes, RouterModule} from '@angular/router';
@@ -10,6 +10,7 @@ import {HomeComponent} from "./home/home.component";
 import {LoginComponent} from "./login/login.component";
 import { RegisterComponent } from "./register/register.component";
 import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -18,10 +19,11 @@ import { PageNotFoundComponent } from "./page-not-found/page-not-found.component
     ReactiveFormsModule,
     RouterModule,
     HttpClientModule,
-
+    SharedModule,
     AuthRoutingModule,
   ],
-  declarations: [HomeComponent, LoginComponent, RegisterComponent, PageNotFoundComponent]
+  declarations: [HomeComponent, LoginComponent, RegisterComponent, PageNotFoundComponent],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AuthModule {
 }

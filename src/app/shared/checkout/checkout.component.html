@@ -1,4 +1,4 @@
-<app-appnav></app-appnav>
+
 <div class="container">
     <div class="py-5 text-center">
       <h2>Checkout</h2>
@@ -24,7 +24,7 @@
           </li>
         </ul>
       </div>
-      
+
       <div class="col-md-8 order-md-1">
         <h4 class="mb-3">Billing address</h4>
         <form class="needs-validation" novalidate=""   [formGroup]="checkoutForm"  (ngSubmit)="doCheckout()">
@@ -83,7 +83,9 @@
           </div>
 
           <hr class="mb-4">
-          <button class="btn btn-primary btn-lg btn-block" [disabled]="!checkoutForm.valid" type="submit">Place Order</button>
+          <button class="btn btn-primary btn-lg btn-block"
+          <!-- [disabled]="!checkoutForm.valid" -->
+           type="submit">Place Order</button>
         </form>
         <div id="snackbar"></div>
       </div>
@@ -91,5 +93,5 @@
     <ng-template #noItemsInCart>
         <h2 class="text-center">Your Cart is empty</h2>
       </ng-template>
-      
+
   </div>

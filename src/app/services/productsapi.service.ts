@@ -1,24 +1,45 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
 import { BehaviorSubject } from 'rxjs';
+import { AuthService } from '../auth/services/auth.service';
+import { Router } from '@angular/router';
+import {  HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProductsService {
+export class ProductsApiService {
   _products = [];
+  products = [];
   _cart = [];
   productsSub;
   cartSub;
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private _router: Router, private _auth: AuthService) {
     this.productsSub = new BehaviorSubject<any[]>(this._products);
     this.cartSub = new BehaviorSubject<any[]>(this._cart);
   }
 
+
+
+
   fetchProducts() {
-    this.http.get<any[]>('/api/products').subscribe(data => {
+    // let token;
+    // if (this._auth.isAuthenticated()) {
+    //   const user = JSON.parse(this._auth.isAuthenticated());
+    //   token = user.token ? user.token : '';
+    // }
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        // 'Authorization': token
+      })
+
+
+    }
+
+    this.http.get<any[]>('http://localhost:4000/products',httpOptions).subscribe(data => {
       this._products = [...data];
+      this.products =this._products;
       this.productsSub.next([...this._products]);
     });
   }
@@ -60,6 +81,6 @@ export class ProductsService {
     return item;
   }
   checkout(data) {
-    return this.http.post('/api/checkout', data);
+    return this.http.post('/checkout', data);
   }
 }

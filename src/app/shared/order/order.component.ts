@@ -11,7 +11,7 @@ export class OrderComponent implements OnInit {
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
-    this.httpClient.get<any>('/api/orders').subscribe(data => this.orders = [...data]);
+    this.httpClient.get<any>('/orders').subscribe(data => this.orders = [...data]);
   }
   totalEarnings(orders) {
     return orders.reduce((acc, cur) => acc + this.orderTotal(cur.items), 0);

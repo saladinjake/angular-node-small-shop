@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductsService } from '../services/productsapi.service';
+import { ProductsApiService } from '../../services/productsapi.service';
 
 @Component({
   selector: 'app-cart',
@@ -9,7 +9,7 @@ import { ProductsService } from '../services/productsapi.service';
 export class CartComponent implements OnInit {
   cart = [];
   cartTotal = 0;
-  constructor(private productsService: ProductsService) { }
+  constructor(private productsService: ProductsApiService) { }
 
   ngOnInit() {
     this.productsService.getCart().subscribe(data => {

@@ -1,56 +1,44 @@
-<div class="col-md-9 headerhero" >
-  <div class="col-sm-6 col-lg-4 col-md-4 mobiles" *ngFor="let player of products">
-      <div class="product-list-box thumb">
-          <a href="javascript:void(0);" class="image-popup" title="Screenshot-1">
-              <img src="{{player.image}}" class="thumb-img" alt="work-thumbnail">
-          </a>
+<app-appnav></app-appnav>
+<div class="row">
 
-          <div class="product-action">
-              <a style="float:right" routerLink="./products/{{player.id}}" class="btn btn-success ">Detail</a>
+  <div class="container">
 
-          </div>
+                  <!-- Page-Title -->
+      <div class="row">
 
-          <div class="price-tag">
-              ${{player.id}}
-          </div>
-          <div class="detail">
-              <h4 class="m-t-0"><a href="" class="text-dark">{{player.name}}</a> </h4>
+        <div class="col-sm-6 col-lg-4 col-md-4 mobiles" *ngFor="let player of products">
+            <div class="product-list-box thumb">
+                <a href="javascript:void(0);" class="image-popup" title="Screenshot-1">
+                    <img src="{{player.image}}" class="thumb-img" alt="work-thumbnail">
+                </a>
 
-              <h5 class="m-0"> <span class="text-muted"> {{player.address}}</span></h5>
-          </div>
+                <div class="product-action">
+                    <a style="float:right" routerLink="../products/{{player.id}}" class="btn btn-success ">Detail</a>
 
-          <button type="button" class="btn" (click)="addItemToCart(item)" [class.btn-outline-primary]="itemInCart(item).length">
-              <i class="fas fa-shopping-cart"></i>
-         </button>
-         
-      </div>
-  </div>
+                </div>
 
+                <div class="price-tag">
+                    ${{player.id}}
+                </div>
+                <div class="detail">
+                    <h4 class="m-t-0"><a href="" class="text-dark">{{player.name}}</a> </h4>
 
+                    <h5 class="m-0"> <span class="text-muted"> {{player.address}}</span></h5>
 
-
-
+                    <button type="button" class="btn" (click)="addItemToCart(player)" [class.btn-outline-primary]="itemInCart(player).length">
+                      Add to cart<i class="fas fa-shopping-cart"></i>
+                  </button>
 
 
-
-
-
+                </div>
+            </div>
+        </div>
 
 
 
-
+          </div> <!-- End row -->
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-    </div>
+              </div>

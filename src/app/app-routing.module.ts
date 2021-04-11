@@ -3,7 +3,8 @@ import {Routes, RouterModule} from '@angular/router';
 // import {PlayersRoutingModule} from "./products/products-routing.module";
 import {AppComponent} from "./app.component";
 import {ProductsModule} from "./products/products.module";
-import { AuthModule } from "./auth//auth.module";
+import { AuthModule } from "./auth/auth.module";
+import {SharedModule } from './shared/shared.module';
 
 import {HomeComponent} from "./auth/home/home.component";
 import {LoginComponent} from "./auth/login/login.component";
@@ -29,6 +30,14 @@ const routes: Routes = [
     path: 'products',
     // canLoad: [AuthGuard],
     loadChildren: () => ProductsModule,
+
+
+  },
+
+  {
+    path: 'buy',
+    // canLoad: [AuthGuard],
+    loadChildren: () => SharedModule,
 
 
   },

@@ -29,17 +29,17 @@ const userSchema = new mongoose.Schema({
   createsAt: {type: String, default: Date.now()}
 })
 
-userSchema.methods.hashPassword = function(password:string) {
+export const hashPassword = function(password:string) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
 };
-userSchema.methods.validatePassword = function(password:string,hash:string,callback:Function) {
+export const validatePassword = function(password:string,hash:string,callback:Function) {
    // return bcrypt.compareSync(password, hash);
-   bcrypt.compare(password, hash, (err, isMatch) => {
+   return bcrypt.compare(password, hash, (err, isMatch) => {
         if(err) throw err;
         callback(null, isMatch);
     });
 };
-userSchema.methods.generateJWT = function(data:{_id:string,email:string}) {
+export const generateJWT = function(data:{_id:string,email:string }) {
   const today = new Date();
   const expirationDate = new Date(today);
   expirationDate.setDate(today.getDate() + 60);
@@ -48,21 +48,21 @@ userSchema.methods.generateJWT = function(data:{_id:string,email:string}) {
   return jwt.sign({
     email: data.email,
     id: data._id,
-    exp: "48h" ,
+    exp: 120000 ,
   }, config.secret);
 }
 
 
 
-userSchema.methods.findByEmail = (email: string, callback: Function) => {
-    User.findOne({email: email}, callback);
-};
 userSchema.plugin(uniqueValidator);
 
 export type UserModel = Model<IUser> & IUserModel & IUser;
 
 export const User: UserModel = <UserModel>model<IUser>("User", userSchema);
 
+export const findByEmail = (usr:UserModel,email: string, callback: Function) => {
+    return usr.findOne({email: email}, callback);
+};
 
 
 // const userModel = mongoose.model<User & mongoose.Document>('User', userSchema);
