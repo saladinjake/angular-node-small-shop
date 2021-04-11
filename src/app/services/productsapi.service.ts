@@ -4,6 +4,9 @@ import { BehaviorSubject } from 'rxjs';
 import { AuthService } from '../auth/services/auth.service';
 import { Router } from '@angular/router';
 import {  HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import {Observable, of} from 'rxjs';
+
+import {Product} from "../shared/product";
 
 @Injectable({
   providedIn: 'root'
@@ -33,12 +36,10 @@ export class ProductsApiService {
         'Content-Type':  'application/json',
         // 'Authorization': token
       })
-
-
     }
 
     this.http.get<any[]>('http://localhost:4000/products',httpOptions).subscribe(data => {
-      this._products = [...data];
+      this._products =   [...data];
       this.products =this._products;
       this.productsSub.next([...this._products]);
     });
@@ -47,19 +48,24 @@ export class ProductsApiService {
   getProducts() {
     return this.productsSub.asObservable();
   }
+
+  public getProduct(id: string) {
+    return of(this._products.filter(p => p._id === id)[0]);
+  }
+
   getCart() {
     return this.cartSub.asObservable();
   }
   addToCart(id) {
     const product = this.findItemInProducts(id);
-    if (product.length !== 0) {
-      if (this.findItemInCart(id).length) {
-        this.removeFromCart(id);
-      } else {
+    // if (product.length !== 0) {
+      // if (this.findItemInCart(id).length) {
+      //   // this.removeFromCart(id);
+      // } else {
         this._cart.push(product[0]);
-      }
+      // }
       this.cartSub.next([...this._cart]);
-    }
+    // }
   }
   removeFromCart(id) {
       if (this.findItemInCart(id).length) {
@@ -71,7 +77,7 @@ export class ProductsApiService {
   }
   clearCart() {
     this.cartSub.next([]);
-}
+  }
   findItemInCart(id) {
     const item = this._cart.filter(product => product._id === id);
     return item;
@@ -81,6 +87,18 @@ export class ProductsApiService {
     return item;
   }
   checkout(data) {
-    return this.http.post('/checkout', data);
+     const Options = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        // 'Authorization': token
+      })
+
+    };
+
+    return this.http.post('http://localhost:4000/checkout', data,Options);
+  }
+
+  resetCart(){
+    this._cart = [];
   }
 }

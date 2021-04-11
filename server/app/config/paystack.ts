@@ -3,7 +3,7 @@ dotenv.config();
 const api_url_init ='https://api.paystack.co/transaction/initialize';
 const api_url_verify ='https://api.paystack.co/transaction/verify/';
 const paystack = (request) => {
-    const MySecretKey = 'Bearer '+ process.env.PAYSTACKSECRET; //saladin
+    const MySecretKey = 'Bearer '+ 'sk_test_a62947c59ee8be8375793ec6f0f197422f43eb19'; //saladin
 
     const initializePayment = (form, mycallback) => {
         const options = {

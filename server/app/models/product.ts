@@ -35,11 +35,6 @@ const ProductSchema = new Schema({
 });
 
 
-// Static methods
-ProductSchema.statics.getRelatedProducts = async function(this: Model<ProductDocument>,id: string) {
-  // return this.findById(id).populate("related").exec()
-}
-
 enum EnumSizes {
   small = 0,
   medium = 1,
@@ -62,56 +57,5 @@ export interface Product {
   // creditCards?: Map<string, string>;
 }
 
-//has both variables and methods
-/**
- * Not directly needed
- */
-interface ProductBaseDocument extends Product, Document {
-  name: string,
-  image: string,
-  price: Number,
-  description: string,
-  // related: Types.Array<string>;
-  // creditCards?: Types.Map<string>;
-  // getProductSize(): string;
-}
-
-
-// For model statics and co
-export interface ProductModel extends Model<ProductDocument> {
-  getRelatedProducts(id: string): Promise<ProductPopulatedDocument>
-}
-
-
-// Export this for strong typing
-export interface ProductDocument extends ProductBaseDocument {
-  // related: Related["_id"];
-}
-
-// Export this for strong typing
-export interface ProductPopulatedDocument extends ProductBaseDocument {
-  // company: Related;
-}
-
-
-
-
-
-// Document middlewares
-// ProductSchema.pre<ProductDocument>("save", function(next) {
-//   if (this.isModified("password")) {
-//     this.image = 'https://puttheurl/'+this.image
-//   }
-// });
-//
-// // Query middlewares
-// ProductSchema.post<Query<UserDocument, ProductDocument>>("findOneAndUpdate", async function(doc) {
-      //do the save action
-// });
-
-
-export default model<ProductDocument, ProductModel>("Product", ProductSchema)
-
-
-// const Product = mongoose.model('Product', ProductSchema);
-// export default Product;
+const Product = mongoose.model('Product', ProductSchema);
+export default Product;

@@ -2,21 +2,32 @@ import express from "express";
 import bodyParser from 'body-parser';
 import path from 'path';
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+
 import config from './app/config/config';
 import { seed } from './app/seed/seed';
-// import router from './app/routes/routes';
-// import cors from 'cors';
 
 import authInterceptor from './app/middlewares/authInterceptor';
 import authController from './app/controllers/auth';
 import homeController from './app/controllers/home';
 import PaymentsGatewayApi from './app/controllers/payments';
-
+dotenv.config();
 const app = express();
+const port = 4000 || process.env.PORT 
+
+// const MongoClient = require('mongodb').MongoClient;
+// const uri = "mongodb+srv://jumanjisuperstore:<password>@cluster0.sf9py.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+// const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+// client.connect(err => {
+//   const collection = client.db("test").collection("devices");
+//   // perform actions on the collection object
+//   client.close();
+// });
+
 
 mongoose.Promise = global.Promise;
 mongoose.connect(
-  config.mongoURL,
+  config.MONGODEPLOYURL || config.mongoURL,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -47,7 +58,8 @@ app.use(function (req, res, next) {
 
 app.post('/register', authController.register);
 app.post('/login', authController.login);
-app.get('/checkout', authInterceptor, homeController.checkout);
+app.post('/checkout', //authInterceptor,
+ homeController.checkout);
 app.get('/products',  homeController.index);
 app.get('/orders', homeController.dashboard);
 app.post('/paystack/pay',authInterceptor,PaymentsGatewayApi.paystackPayMeMyMoney); //
@@ -60,5 +72,6 @@ app.get('/setup/seed/migrations',async (request,response)=>{
   const result =await seed();
   return response.json({result})
 })
-app.listen(4000, () => console.log("App running on port 4000...yeh!!!"));
+app.listen(port, () => console.log(`App running on port ${port}...yeh!!!`));
+
 export default app;

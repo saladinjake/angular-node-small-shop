@@ -6,11 +6,16 @@ import { CheckoutComponent } from "./checkout/checkout.component";
 import { OrderComponent } from "./order/order.component";
 import {RouterModule} from '@angular/router';
 import { SharedRoutingModule } from './shared-routing.module';
+import { FormsModule } from '@angular/forms';
+import {  ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   imports: [
+
+    SharedRoutingModule,
     CommonModule,
     RouterModule ,
-    SharedRoutingModule
+    FormsModule,
+     ReactiveFormsModule,
 
   ],
   declarations: [

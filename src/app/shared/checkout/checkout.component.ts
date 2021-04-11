@@ -15,9 +15,9 @@ export class CheckoutComponent implements OnInit {
   cart = [];
   cartTotal = 0;
   checkoutForm = this.fb.group({
-    firstName: ['', Validators.required],
-    lastName: ['', Validators.required],
-    email: ['', Validators.required],
+    firstName: ['saladin', Validators.required],
+    lastName: ['saladin', Validators.required],
+    email: ['saladin@gmail', Validators.required],
     addressOne: ['', Validators.required],
     addressTwo: [''],
     country: ['', Validators.required],
@@ -35,8 +35,11 @@ export class CheckoutComponent implements OnInit {
   doCheckout() {
     const order = {
       ...this.checkoutForm.value,
-      items: this.cart
+
+      items: this.cart,
+      total:this.cartTotal
     };
+    console.log(order)
     this.productsService.checkout(order).subscribe(res => {
       const snackbar = document.getElementById('snackbar');
       snackbar.innerHTML = 'Order placed successfully';
@@ -44,6 +47,7 @@ export class CheckoutComponent implements OnInit {
       setTimeout(() => {
         snackbar.className = snackbar.className.replace('show', '');
         this.productsService.clearCart();
+        this.productsService.resetCart();
         this.router.navigate(['/products']);
       }, 3000);
     });

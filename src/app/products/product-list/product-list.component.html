@@ -13,17 +13,17 @@
                 </a>
 
                 <div class="product-action">
-                    <a style="float:right" routerLink="../products/{{player.id}}" class="btn btn-success ">Detail</a>
+                    <a style="float:right" routerLink="../products/{{player._id}}" class="btn btn-success ">Detail</a>
 
                 </div>
 
                 <div class="price-tag">
-                    ${{player.id}}
+                    ${{player.price}}
                 </div>
                 <div class="detail">
                     <h4 class="m-t-0"><a href="" class="text-dark">{{player.name}}</a> </h4>
 
-                    <h5 class="m-0"> <span class="text-muted"> {{player.address}}</span></h5>
+                    <h5 class="m-0"> <span class="text-muted"> {{player.description}}</span></h5>
 
                     <button type="button" class="btn" (click)="addItemToCart(player)" [class.btn-outline-primary]="itemInCart(player).length">
                       Add to cart<i class="fas fa-shopping-cart"></i>
