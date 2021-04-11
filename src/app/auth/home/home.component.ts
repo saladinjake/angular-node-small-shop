@@ -18,11 +18,23 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.productService.getProducts().subscribe(products => this.products = products.slice(0, 8), err => console.log('error: ' + err));
+    this.productService.fetchProducts();
+    this.productService.getProducts().subscribe(data => {
+      console.log(data)
+      this.products = [...data].slice(0,12);
+    });
+
     this.productService.getCart().subscribe(data => {
       this.cart = [...data];
     });
 
+  }
+
+  addItemToCart(item) {
+    this.productService.addToCart(item._id);
+  }
+  itemInCart(item) {
+    return this.productService.findItemInCart(item._id);
   }
 
 }

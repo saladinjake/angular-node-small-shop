@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {ProductService} from "../../services/product.service";
+import { ProductsApiService } from "../../services/productsapi.service";
 import {catchError, switchMap} from "rxjs/internal/operators";
-import {Product} from "../../shared/product";
+import { Product } from "../../shared/product";
 
 @Component({
   selector: 'app-player-detail',
@@ -14,12 +14,16 @@ export class ProductDetailComponent implements OnInit {
   private id: number;
   public  product: Product;
 
-  constructor(private route: ActivatedRoute, private productService: ProductService) {
+  constructor(private route: ActivatedRoute, private productService: ProductsApiService) {
+  }
+
+  addItemToCart(item) {
+    this.productService.addToCart(item._id);
   }
 
   ngOnInit() {
     this.route.params.pipe(
-      switchMap(params => this.productService.getProduct(+params['id'])),
+      switchMap(params => this.productService.getProduct(params['id'])),
       //catchError(err => console.log(err))
 
     ).subscribe(

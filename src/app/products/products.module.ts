@@ -5,13 +5,14 @@ import { ProductsRoutingModule } from './products-routing.module';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { SharedModule } from '../shared/shared.module';
-
+import { FormsModule } from '@angular/forms';
 import { AuthGuard } from '../auth/guards/auth-guard.service';
 @NgModule({
   imports: [
     ProductsRoutingModule,
     CommonModule,
     SharedModule,
+    FormsModule
   ],
   declarations: [ProductListComponent, ProductDetailComponent],
   // providers:[AuthGuard]

@@ -16,15 +16,15 @@ export interface IForm  {
 
 class PaystackApi{
   static paystackPayMeMoney(req,res){
-     const { fullname,email,amount,phone_number } = req.body;
+    console.log(req.body)
     //
     const form:IForm = {
-      fullname,
-      email,
-      amount,
-      phone_number,
+      fullname: req.body.firstName + req.body.lastName,
+      email: req.body.email,
+      amount: req.body.total ,
+      phone_number:"08130870416",
       metadata:{
-        fullname
+        fullname: req.body.firstName + req.body.lastName
       }
     };
     //ensure
@@ -37,14 +37,16 @@ class PaystackApi{
     initializePayment(form, (error, body)=>{
       if(error){
         //handle errors
-        return res.redirect('/error')
+        return res.json({error})
       }
       var response = JSON.parse(body);
+
+      console.log(response)
       let url =response.data.authorization_url;
 
       return res.status(201).json({
         status: 201,
-        message: `<h6>Please click the link to make payments.<a style="color:red;text-decoration:none"  href="${url}">Proceed to payment</a></h6>
+        message: `<h1>Please click the link to confirm your payments.<a style="color:red;text-decoration:none"  href="${url}">Proceed to payment</a></h6>
         `,
       });
 

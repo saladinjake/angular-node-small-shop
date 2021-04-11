@@ -9,7 +9,7 @@ import {ProductsRoutingModule} from "./products/products-routing.module";
 import {SharedModule} from "./shared/shared.module";
 import {ServicesModule} from "./services/services.module";
 import { AuthModule } from './auth/auth.module';
-
+import {  ReactiveFormsModule} from '@angular/forms';
 import { AuthGuard } from './auth/guards/auth-guard.service';
 
 import { HTTP_INTERCEPTORS }  from '@angular/common/http';
@@ -21,6 +21,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     AuthModule,
     ProductsRoutingModule,

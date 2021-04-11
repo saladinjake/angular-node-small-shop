@@ -3,6 +3,7 @@ import { User } from '../models/user';
 import  Product  from '../models/product';
 import  Order  from '../models/product';
 import jwt from 'jsonwebtoken';
+import PaymentsGatewayApi from './payments';
 class homeController {
   static index(request: Request, response: Response){
     Product.find({}).then(rec => {
@@ -10,7 +11,7 @@ class homeController {
       if(rec) {
         return response.status(200).json(rec);
       } else {
-      
+
         return response.status(200).json([]);
       }
     })
@@ -31,7 +32,8 @@ class homeController {
       items: request.body.items.map(item => item._id) || []
     })
     newOrder.save().then(rec => {
-      response.status(200).json(rec)
+      return PaymentsGatewayApi.paystackPayMeMyMoney(request,response);
+      // response.status(200).json(rec)
     }, (err) => {
       response.status(500).json({error: 'error'})
     });
